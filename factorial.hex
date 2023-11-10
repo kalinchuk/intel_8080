@@ -1,0 +1,14 @@
+0E 05    ; MVI C, 05H
+3E 01    ; MVI A, 01H
+CD 0F 00 ; CALL MULT (assumes MULT is at 0009h)
+0D       ; DCR C
+C2 04 00 ; JNZ FACT_LOOP (assumes FACT_LOOP is at 0002h)
+32 00 01 ; STA 0100H
+76       ; HLT
+51       ; MOV D, C (MULT subroutine)
+5F       ; MOV E, A
+3E 00    ; MVI A, 00H
+83       ; ADD E (MULT_LOOP)
+15       ; DCR D
+C2 13 00 ; JNZ MULT_LOOP (assumes MULT_LOOP is at 000Ch)
+C9       ; RET
